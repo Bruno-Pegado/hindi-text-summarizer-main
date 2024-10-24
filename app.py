@@ -34,7 +34,7 @@ def summarize():
         sentence_scores.sort(key=lambda x: x[1], reverse=True)
         
         n = len(sentence_scores)
-        a = round(n * 0.7)
+        a = round(n * 0.65)
         top_sentences_idx = [idx for idx, score in sentence_scores[:a]]
         
         top_sentences_idx.sort()

@@ -8,22 +8,15 @@ from src.utils.dictionaries import lemmatization_dict,stopwords_mr
 
 
 def preprocess(paragraph:str):
-    # sentence-tokeniation
+
     tokenized_sentences = sentence_tokenize.sentence_split(paragraph, lang='hi')
 
-    # word-tokenization
     tokenized_words = word_tokenize(tokenized_sentences)
 
-    # lemmatization
     lemmatized_word_op = lemmatize_tokenized_words(tokenized_words)
 
-    # stop words removal
-    stopword_removed = remove_stopwords(lemmatized_word_op)
+    filtration_op = filter_hindi(lemmatized_word_op)
 
-    # filtration
-    filtration_op = filter_hindi(stopword_removed)
-
-    # scrip validation
     punc_processed = remove_punctuation(filtration_op)
     return punc_processed
 
@@ -49,16 +42,6 @@ def lemmatize_tokenized_words(tokenized_words_list: list) -> list:
         lemmatized_sentence = [lemmatize_word(word) for word in sentence]
         lemmatized_list.append(lemmatized_sentence)
     return lemmatized_list
-
-
-
-def remove_stopwords(lemmatized_words_list: list) -> list:
-    stopwords_removed = []
-    for sentence in lemmatized_words_list:  # Iterate through lemmatized sentences
-        # Remove stopwords from each sentence
-        filtered_sentence = [word for word in sentence if word not in stopwords_mr]
-        stopwords_removed.append(filtered_sentence)
-    return stopwords_removed
 
 
 
